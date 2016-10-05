@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 
 
 def merge(prefix, suffix):
@@ -147,4 +148,5 @@ def get_sequence_pos(s):
     return get_number_position(num) - offset
 
 if __name__ == '__main__':
-    pass
+    for seq in sys.stdin:
+        print(get_sequence_pos(seq.strip()))
