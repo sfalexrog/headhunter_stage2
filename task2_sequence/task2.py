@@ -97,8 +97,16 @@ def find_sequence(s):
         if right_suffix_len < left_suffix_len:
             right_suffix = '0' * (left_suffix_len - right_suffix_len) + right_suffix
         # "Съедаем" совпадающие символы у префикса и суффикса
-        number = int(merge(right_prefix, right_suffix))
-        candidates.append((number, i))
+        num_merge = merge(right_prefix, right_suffix)
+        number = int(num_merge)
+        # Проверяем, не подойдёт ли нам предыдущее число
+        number_len = len(num_merge)
+        potential_seq = str(number - 1) + num_merge
+        potential_seq_pos = potential_seq.find(s)
+        if potential_seq_pos < number_len:
+            candidates.append((number - 1, -potential_seq_pos))
+        else:
+            candidates.append((number, i))
         modulo *= 10
     retval = min(candidates, key=lambda x: x[0])
     # print('Number not found :(')
